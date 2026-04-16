@@ -4,13 +4,13 @@ import java.util.Scanner
 // 1. ИНТЕРФЕЙСЫ
 // =========================================================
 
-// Интерфейс для консольного ввода/вывода (Требование 2)
+// Интерфейс для консольного ввода/вывода 
 interface ConsoleIO {
     fun printTransports(transports: List<Transport>)
     fun addTransportFromConsole()
 }
 
-// Интерфейс для операций над объектами (Требование 3)
+// Интерфейс для операций над объектами 
 interface TransportOperations {
     fun getSortedBySpeed(): List<Transport>
     fun getSortedByRange(): List<Transport>
@@ -28,14 +28,14 @@ abstract class Transport(
     val maxSpeed: Double,        // км/ч
     val maxRange: Double,        // км
     val passengerCapacity: Int,  // Количество мест
-    val cargoWeightKg: Double    // Внутреннее хранение ВСЕГДА в килограммах для точного поиска
+    val cargoWeightKg: Double    // Внутреннее хранение в килограммах для точного поиска
 ) {
     abstract fun getDetailedInfo(): String
 }
 
 class Car(
     model: String, type: String, fuelConsumption: Double, maxSpeed: Double, maxRange: Double, passengerCapacity: Int,
-    cargoWeightKg: Double, // Для авто вес груза передается в кг
+    cargoWeightKg: Double, 
     val brand: String,
     val color: String
 ) : Transport(model, type, fuelConsumption, maxSpeed, maxRange, passengerCapacity, cargoWeightKg) {
@@ -46,7 +46,7 @@ class Car(
 
 class Ship(
     model: String, type: String, fuelConsumption: Double, maxSpeed: Double, maxRange: Double, passengerCapacity: Int,
-    cargoWeightTons: Double, // Для корабля вес передается в тоннах
+    cargoWeightTons: Double, 
     val name: String,
     val homePort: String,
     val crewCount: Int,
@@ -59,11 +59,11 @@ class Ship(
 
 class Airplane(
     model: String, type: String, fuelConsumption: Double, maxSpeed: Double, maxRange: Double, passengerCapacity: Int,
-    cargoWeightTons: Double, // Для самолета вес передается в тоннах
+    cargoWeightTons: Double, 
     val maxAltitude: Double,
     val crewCount: Int,
     val engineCount: Int
-) : Transport(model, type, fuelConsumption, maxSpeed, maxRange, passengerCapacity, cargoWeightTons * 1000.0) { // Перевод в кг
+) : Transport(model, type, fuelConsumption, maxSpeed, maxRange, passengerCapacity, cargoWeightTons * 1000.0) { 
     override fun getDetailedInfo(): String {
         return "✈️ Самолет [$model] Тип: $type | Высота: $maxAltitude м | Экипаж: $crewCount | Двигателей: $engineCount | Скорость: $maxSpeed км/ч | Дальность: $maxRange км | Мест: $passengerCapacity | Груз: ${cargoWeightKg / 1000} тонн"
     }

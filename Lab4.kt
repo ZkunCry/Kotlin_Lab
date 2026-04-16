@@ -18,7 +18,7 @@ interface TransportOperations {
 }
 
 // =========================================================
-// 2. СИСТЕМА КЛАССОВ И НАСЛЕДОВАНИЕ (Требование 1)
+// 2. СИСТЕМА КЛАССОВ И НАСЛЕДОВАНИЕ 
 // =========================================================
 
 abstract class Transport(
@@ -30,13 +30,12 @@ abstract class Transport(
     val passengerCapacity: Int,  // Количество мест
     val cargoWeightKg: Double    // Внутреннее хранение ВСЕГДА в килограммах для точного поиска
 ) {
-    // Полиморфный метод для красивого вывода
     abstract fun getDetailedInfo(): String
 }
 
 class Car(
     model: String, type: String, fuelConsumption: Double, maxSpeed: Double, maxRange: Double, passengerCapacity: Int,
-    cargoWeightKg: Double, // Для авто вес груза передается сразу в кг
+    cargoWeightKg: Double, // Для авто вес груза передается в кг
     val brand: String,
     val color: String
 ) : Transport(model, type, fuelConsumption, maxSpeed, maxRange, passengerCapacity, cargoWeightKg) {
@@ -71,21 +70,18 @@ class Airplane(
 }
 
 // =========================================================
-// 3. МЕНЕДЖЕР ФЛОТА (Реализация интерфейсов)
+// 3. Реализация интерфейсов
 // =========================================================
 
 class FleetManager : ConsoleIO, TransportOperations {
     private val fleet = mutableListOf<Transport>()
     private val scanner = Scanner(System.`in`)
 
-    // Добавление предустановленных данных для удобства тестирования
     fun loadDummyData() {
         fleet.add(Car("Camry", "Седан", 8.5, 210.0, 700.0, 5, 450.0, "Toyota", "Черный"))
         fleet.add(Airplane("737 MAX", "Пассажирский", 2500.0, 850.0, 6500.0, 180, 5.0, 12000.0, 6, 2))
         fleet.add(Ship("Севморпуть", "Ледокол", 500.0, 40.0, 20000.0, 50, 150.0, "Арктика", "Мурманск", 30, 4))
     }
-
-    // --- Реализация ConsoleIO ---
 
     override fun printTransports(transports: List<Transport>) {
         if (transports.isEmpty()) {
@@ -177,24 +173,21 @@ class FleetManager : ConsoleIO, TransportOperations {
             }
         } catch (e: Exception) {
             println("❌ Ошибка ввода. Проверьте правильность введенных данных.")
-            scanner.nextLine() // очистка буфера
+            scanner.nextLine() 
         }
     }
 
     // --- Реализация TransportOperations ---
 
     override fun getSortedBySpeed(): List<Transport> {
-        // Сортировка по убыванию скорости
         return fleet.sortedByDescending { it.maxSpeed }
     }
 
     override fun getSortedByRange(): List<Transport> {
-        // Сортировка по убыванию дальности
         return fleet.sortedByDescending { it.maxRange }
     }
 
     override fun search(requiredSeats: Int, requiredCargoKg: Double): List<Transport> {
-        // Поиск по минимальным требованиям вместимости и грузоподъемности
         return fleet.filter { it.passengerCapacity >= requiredSeats && it.cargoWeightKg >= requiredCargoKg }
     }
 }
@@ -219,14 +212,9 @@ private fun readDouble(prompt: String): Double {
     }
 }
 
-
-// =========================================================
-// 4. ГЛАВНАЯ ФУНКЦИЯ (Точка входа)
-// =========================================================
-
 fun main() {
     val manager = FleetManager()
-    manager.loadDummyData() // Загружаем стартовые данные
+    manager.loadDummyData() 
     val scanner = Scanner(System.`in`)
 
     while (true) {

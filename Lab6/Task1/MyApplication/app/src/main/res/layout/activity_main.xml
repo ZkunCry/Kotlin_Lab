@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:gravity="center_horizontal">
+
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Вводимый текст"
+        android:layout_marginBottom="24dp"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnCopy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Копировать"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/tvOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Скопированный текст"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Закрыть" />
+
+</LinearLayout>
